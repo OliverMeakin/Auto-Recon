@@ -1,66 +1,75 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Recon Engine — Rules-based reconciliation automation for Excel</title>
-  <meta name="description" content="Recon Engine is a rules-based reconciliation engine for Excel: configurable matching, audit trail outputs, and review-first workflows for accounting and finance teams." />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Recon Engine is an Excel-native reconciliation workflow with configurable matching rules, clear statuses, and audit-friendly outputs." />
+  <title>Recon Engine, reconciliation automation for Excel</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
+  <!-- NAV -->
   <header class="nav">
     <div class="wrap nav-inner">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">R</div>
+      <a class="brand" href="#top" aria-label="Recon Engine home">
+        <div class="logo">R</div>
         <div class="brand-text">
           <div class="brand-name">Recon Engine</div>
-          <div class="brand-tag">Rules-based reconciliation automation for Excel</div>
+          <div class="brand-tag">Audit-friendly reconciliation automation for Excel</div>
         </div>
-      </div>
+      </a>
 
-      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+      <!-- Desktop links -->
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
         <a href="#product">Product</a>
         <a href="#how">How it works</a>
-        <a href="#templates">Use cases</a>
+        <a href="#usecases">Use cases</a>
         <a href="#demo">Demo</a>
         <a href="#about">About</a>
       </nav>
 
       <div class="nav-actions">
-        <button class="btn ghost" id="themeBtn" type="button" aria-label="Toggle theme">Theme</button>
-        <button class="btn ghost nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+        <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">Theme</button>
+
+        <button class="btn nav-toggle" id="navToggle" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span class="icon icon-menu" aria-hidden="true">☰</span>
+          <span class="icon icon-close" aria-hidden="true">✕</span>
+        </button>
       </div>
     </div>
 
+    <!-- Mobile menu -->
     <div class="mobile-menu" id="mobileMenu" hidden>
-      <a href="#product">Product</a>
-      <a href="#how">How it works</a>
-      <a href="#templates">Use cases</a>
-      <a href="#demo">Demo</a>
-      <a href="#about">About</a>
-      <div class="mobile-cta">
-        <a class="btn primary wide" href="#contact">Request a demo</a>
+      <div class="wrap mobile-menu-inner">
+        <a href="#product">Product</a>
+        <a href="#how">How it works</a>
+        <a href="#usecases">Use cases</a>
+        <a href="#demo">Demo</a>
+        <a href="#about">About</a>
+
+        <div class="mobile-cta">
+          <a class="btn primary wide" href="#contact">Request a demo</a>
+          <a class="btn wide" href="mailto:Oliversmeakin@icloud.com">Email</a>
+        </div>
       </div>
     </div>
   </header>
 
   <main id="main">
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="top">
       <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow">
-            <span class="pill">Built for accounting and finance</span>
-            <span class="muted">Excel-native, audit-friendly</span>
-          </div>
+        <div class="hero-left">
+          <div class="kicker">Built for accounting and finance</div>
 
           <h1>Reconciliation automation that feels like a product, not a spreadsheet hack.</h1>
 
@@ -75,73 +84,80 @@
             <a class="btn" href="#demo">See the UI</a>
           </div>
 
-          <div class="badges">
-            <span class="badge">Excel-native delivery</span>
-            <span class="badge">Configurable match rules</span>
-            <span class="badge">Audit log outputs</span>
-            <span class="badge">Review-first workflow</span>
+          <!-- calmer: only 2 highlights above the fold -->
+          <div class="mini-highlights" aria-label="Highlights">
+            <div class="mini-pill">Excel-native delivery</div>
+            <div class="mini-pill">Audit-friendly outputs</div>
           </div>
 
-          <div class="trust">
-            <div class="trust-title">Designed for close support:</div>
-            <div class="trust-items">
-              <span class="trust-item">Clear statuses</span>
-              <span class="trust-item">Traceable groupings</span>
-              <span class="trust-item">Exception routing</span>
-              <span class="trust-item">Minimal change management</span>
+          <!-- moved down: chips + support box are below fold on mobile -->
+          <div class="badges" aria-label="Feature tags">
+            <span class="badge">Configurable match rules</span>
+            <span class="badge">Review-first workflow</span>
+            <span class="badge">Clear statuses + traceability</span>
+            <span class="badge">Works with existing exports</span>
+          </div>
+
+          <div class="support-box">
+            <div class="support-title">Designed for close support</div>
+            <div class="support-grid">
+              <div class="support-item">Clear statuses</div>
+              <div class="support-item">Traceable groupings</div>
+              <div class="support-item">Exception routing</div>
+              <div class="support-item">Minimal change management</div>
             </div>
           </div>
         </div>
 
-        <!-- APP PREVIEW -->
-        <div class="app-card" aria-label="Recon Engine preview">
+        <!-- UI preview -->
+        <aside class="app-card" id="demo" aria-label="UI preview">
           <div class="app-top">
             <div class="app-title">
-              <div class="app-pill">Standalone feel, inside Excel</div>
-              <div class="app-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="app-pill">Standalone feel, inside Excel</span>
+              <span class="app-dots" aria-hidden="true"><span></span><span></span><span></span></span>
             </div>
 
             <div class="app-kv">
               <div class="kv">
                 <div class="k">Status</div>
-                <div class="v" id="statusText">Ready</div>
+                <div class="v" id="uiStatus">Ready</div>
               </div>
               <div class="kv">
                 <div class="k">Last run</div>
-                <div class="v mono" id="lastRunText">—</div>
+                <div class="v mono" id="uiLastRun">—</div>
               </div>
             </div>
 
             <div class="app-stats">
               <div class="stat">
                 <div class="stat-k">Matched</div>
-                <div class="stat-v" id="m1">0</div>
+                <div class="stat-v" id="uiMatched">0</div>
               </div>
               <div class="stat">
                 <div class="stat-k">Cleared moved</div>
-                <div class="stat-v" id="m2">0</div>
+                <div class="stat-v" id="uiCleared">0</div>
               </div>
               <div class="stat">
                 <div class="stat-k">Tolerance flags</div>
-                <div class="stat-v" id="m3">0</div>
+                <div class="stat-v" id="uiTol">0</div>
               </div>
               <div class="stat">
                 <div class="stat-k">Needs review</div>
-                <div class="stat-v" id="m4">0</div>
+                <div class="stat-v" id="uiReview">0</div>
               </div>
             </div>
 
-            <button class="btn primary wide" id="fakeRunBtn" type="button">Run reconciliation</button>
+            <button class="btn primary wide" id="runBtn" type="button">Run recon</button>
 
             <div class="log">
               <div class="log-head">
                 <div class="log-title">Activity log</div>
-                <div class="log-hint muted">Demo UI</div>
+                <div class="muted small" id="uiEnv">Website demo</div>
               </div>
-              <div class="log-box mono" id="logBox" aria-live="polite"></div>
+              <div class="log-box mono" id="logBox">2026-01-31 00:00:00 | Website loaded</div>
             </div>
           </div>
-        </div>
+        </aside>
       </div>
     </section>
 
@@ -150,59 +166,28 @@
       <div class="wrap">
         <div class="section-head">
           <h2>What it does</h2>
-          <p class="muted">
-            A configurable reconciliation core that matches within groupings, logs outputs, and routes exceptions.
-          </p>
+          <p class="muted">Faster matching, clearer outputs, fewer surprises during close.</p>
         </div>
 
         <div class="cards">
           <div class="card">
-            <h3>Matches the way accountants think</h3>
-            <p>
-              Exact matches and grouped matches to net to zero within a configurable key
-              (account, vendor, entity, project, cost center, or any custom grouping).
-            </p>
+            <h3>Finds matches</h3>
+            <p>Pairs and subset-matches transactions that net to a target amount within a grouping you define.</p>
           </div>
 
           <div class="card">
-            <h3>Enforces your rules</h3>
-            <p>
-              Prevent invalid combinations with configurable constraints (type locks, restricted pairings,
-              cardinality rules). Flag uncertain items instead of forcing them through.
-            </p>
+            <h3>Applies guardrails</h3>
+            <p>Enforce constraints like allowed sources, type separation, and one-to-many vs many-to-one behavior.</p>
           </div>
 
           <div class="card">
-            <h3>Produces an audit-friendly output</h3>
-            <p>
-              Writes statuses back to the working sheet, appends cleared groups to an append-only log,
-              and generates a trace output to support review, transparency, and troubleshooting.
-            </p>
+            <h3>Creates traceability</h3>
+            <p>Writes statuses back, appends cleared groups to a log sheet, and generates a debug trace for review.</p>
           </div>
         </div>
 
-        <div class="divider"></div>
-
-        <div class="grid-2">
-          <div class="panel-card">
-            <h3>Outputs you can hand to reviewers</h3>
-            <ul class="list">
-              <li><strong>Status column</strong> for quick close workflows</li>
-              <li><strong>Cleared log</strong> (append-only) for audit support</li>
-              <li><strong>Review queue</strong> for exceptions and weak matches</li>
-              <li><strong>Trace output</strong> for “why did this match?” questions</li>
-            </ul>
-          </div>
-
-          <div class="panel-card">
-            <h3>Configurable, not custom-coded</h3>
-            <ul class="list">
-              <li>Map your columns once (grouping key, amounts, optional memo/source)</li>
-              <li>Set tolerance, matching modes, and guardrails</li>
-              <li>Reuse the same engine across multiple reconciliations</li>
-              <li>Templates available for common patterns</li>
-            </ul>
-          </div>
+        <div class="note">
+          <strong>Note:</strong> This is positioned as a configurable engine. No company-specific labels are required.
         </div>
       </div>
     </section>
@@ -212,154 +197,103 @@
       <div class="wrap">
         <div class="section-head">
           <h2>How it works</h2>
-          <p class="muted">A straightforward workflow designed for month-end and audit-readiness.</p>
+          <p class="muted">A review-first flow that fits existing processes and improves audit clarity.</p>
         </div>
 
         <div class="how">
           <div class="how-col">
             <div class="step">1</div>
-            <h3>Configure</h3>
-            <p class="muted">
-              Choose your grouping key, amount columns (net or debit/credit), and optional memo/source fields.
-            </p>
+            <h3>Import your export</h3>
+            <p>Use the same Excel export you already reconcile. Map the relevant columns once.</p>
           </div>
-
           <div class="how-col">
             <div class="step">2</div>
-            <h3>Run</h3>
-            <p class="muted">
-              The engine matches within each group using your rules. Uncertain items are routed to review.
-            </p>
+            <h3>Run matching rules</h3>
+            <p>Exact matches first, then controlled subsets. Tolerance edge cases are flagged, not forced.</p>
           </div>
-
           <div class="how-col">
             <div class="step">3</div>
-            <h3>Review and export</h3>
-            <p class="muted">
-              Use the cleared log and trace output to support internal review and audit requests.
-            </p>
+            <h3>Review + clear</h3>
+            <p>Clear groups are appended to a log. Exceptions stay in place with a status for follow-up.</p>
           </div>
-        </div>
-
-        <div class="note">
-          <strong>Excel-native delivery:</strong> ships as an Excel workbook “app shell” + automation scripts.
-          Minimal change management and fast adoption for accounting teams.
         </div>
       </div>
     </section>
 
     <!-- USE CASES -->
-    <section class="section" id="templates">
+    <section class="section" id="usecases">
       <div class="wrap">
         <div class="section-head">
           <h2>Use cases</h2>
-          <p class="muted">A few common reconciliation patterns where rules-based matching saves time.</p>
+          <p class="muted">A flexible core that can apply across accounts and reconciliation styles.</p>
         </div>
 
-        <div class="cards">
-          <div class="card">
-            <h3>Bank and cash activity</h3>
-            <p>Statement vs ledger activity, timing differences, tolerance handling, and exception review routing.</p>
+        <div class="grid-2">
+          <div class="panel-card">
+            <h3>High-volume clearing</h3>
+            <p class="muted">Grouped matching and guardrails reduce manual work on large transaction sets.</p>
+            <ul class="list">
+              <li>Batch pairing + subset matching</li>
+              <li>Status-based workflow for close</li>
+              <li>Trace output for internal review</li>
+            </ul>
           </div>
-          <div class="card">
-            <h3>Clearing accounts</h3>
-            <p>High-volume clearing activity where grouped matching and guardrails reduce manual work.</p>
-          </div>
-          <div class="card">
+
+          <div class="panel-card">
             <h3>Intercompany and settlements</h3>
-            <p>Entity-based groupings, many-to-many settlement matching, and standardized trace output.</p>
+            <p class="muted">Entity-based groupings, many-to-many settlement matching, and standardized trace output.</p>
+            <ul class="list">
+              <li>Group by entity, period, or reference</li>
+              <li>Many-to-many matching supported</li>
+              <li>Audit log for reconciliation support</li>
+            </ul>
           </div>
         </div>
 
-        <div class="panel-card callout">
+        <div class="callout">
           <div>
-            <h3>Custom template support</h3>
-            <p class="muted">
-              If your export format is unique, we can build a tailored configuration and matching rules around your structure.
-              Sanitized sample data is fine.
-            </p>
+            <h3 class="callout-title">Custom template support</h3>
+            <p class="muted">If your export format is unique, we can build a tailored configuration and rule set around your structure.</p>
+            <p class="muted small">Sanitized sample data is fine.</p>
           </div>
           <a class="btn primary" href="#contact">Request a demo</a>
         </div>
       </div>
     </section>
 
-    <!-- DEMO -->
-    <section class="section" id="demo">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Demo</h2>
-          <p class="muted">
-            Add screenshots later. These placeholders show how to present the product professionally.
-          </p>
-        </div>
-
-        <div class="shots">
-          <div class="shot">
-            <div class="shot-title">App Home</div>
-            <div class="shot-body muted">Dashboard, run button, stats, activity log</div>
-          </div>
-          <div class="shot">
-            <div class="shot-title">Results</div>
-            <div class="shot-body muted">Matched groups, cleared log, review queue</div>
-          </div>
-          <div class="shot">
-            <div class="shot-title">Trace Output</div>
-            <div class="shot-body muted">“Why this matched” detail for reviewers</div>
-          </div>
-        </div>
-
-        <p class="muted small">
-          Tip: export 2–3 screenshots from Excel and place them in <code>/assets</code>, then replace these boxes with images.
-        </p>
-      </div>
-    </section>
-
     <!-- ABOUT + CONTACT -->
     <section class="section" id="about">
-      <div class="wrap about-grid">
-        <div>
-          <div class="section-head">
-            <h2>About</h2>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>About</h2>
+          <p class="muted">Independent build focused on practical close workflows, clarity, and control.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="panel-card">
+            <h3>Approach</h3>
             <p class="muted">
-              Built for teams that need speed during close without compromising controls.
+              The goal is simple: speed up matching while improving traceability. The engine is designed
+              to be configured per customer, without forcing a new system.
+            </p>
+            <div class="divider"></div>
+            <p class="muted small">
+              Demo site only, no proprietary reconciliation logic is published here.
             </p>
           </div>
 
-          <div class="panel-card">
-            <h3>Principles</h3>
-            <ul class="list">
-              <li><strong>Control-first:</strong> don’t force weak matches</li>
-              <li><strong>Traceable:</strong> outputs support review and audit questions</li>
-              <li><strong>Practical:</strong> stays in Excel where teams already work</li>
-              <li><strong>Reusable:</strong> one engine across multiple reconciliations</li>
-            </ul>
-          </div>
-        </div>
+          <div class="panel-card" id="contact">
+            <h3>Contact</h3>
+            <p class="muted">Request a demo, ask questions, or discuss your reconciliation workflow.</p>
 
-        <div class="panel-card contact-card" id="contact">
-          <h3>Request a demo</h3>
-          <p class="muted">
-            Email to discuss a pilot, configuration, or a custom template.
-          </p>
+            <div class="contact">
+              <a class="btn primary wide" href="mailto:Oliversmeakin@icloud.com?subject=Recon%20Engine%20demo%20request">Email Oliver</a>
+              <a class="btn wide" href="https://github.com/OliverMeakin" target="_blank" rel="noreferrer">GitHub profile</a>
+            </div>
 
-          <div class="contact">
-            <a class="btn primary wide" href="mailto:Oliversmeakin@icloud.com?subject=Recon%20Engine%20Demo%20Request">Email me</a>
-            <a class="btn wide" href="#demo">See the demo section</a>
-          </div>
-
-          <div class="divider"></div>
-
-          <h4>Helpful details to include</h4>
-          <ul class="muted small">
-            <li>Reconciliation type (cash, clearing, intercompany, etc.)</li>
-            <li>Grouping key (account/vendor/entity/project/etc.)</li>
-            <li>Volume (rows per month)</li>
-            <li>Constraints (“never match X to Y”, tolerance needs)</li>
-          </ul>
-
-          <div class="fine muted small">
-            Your data can be sanitized. The goal is to understand structure and rule requirements.
+            <p class="fine muted small">
+              Tip: If you share sample data, sanitize vendor names, employee names, and any sensitive references.
+            </p>
           </div>
         </div>
       </div>
@@ -367,13 +301,8 @@
 
     <footer class="footer">
       <div class="wrap footer-inner">
-        <div class="footer-left">
-          <div class="footer-brand">Recon Engine</div>
-          <div class="muted small">Rules-based reconciliation automation for Excel</div>
-        </div>
-        <div class="footer-right muted small">
-          © <span id="year"></span> Recon Engine
-        </div>
+        <div class="footer-brand">Recon Engine</div>
+        <div class="muted small">© <span id="year"></span> • Built for Excel-native workflows</div>
       </div>
     </footer>
   </main>
