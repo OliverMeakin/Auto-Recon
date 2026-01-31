@@ -279,6 +279,7 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   flex-wrap:wrap;
   margin: 14px 0 14px;
 }
+
 .mini-highlights{
   display:flex;
   gap:10px;
@@ -298,6 +299,7 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   border:1px solid rgba(15,23,42,0.10);
   background: rgba(15,23,42,0.03);
 }
+
 .badges{
   display:flex;
   flex-wrap:wrap;
@@ -317,6 +319,7 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   border:1px solid rgba(15,23,42,0.10);
   background: rgba(15,23,42,0.04);
 }
+
 .support-box{
   padding: 16px 16px;
   border-radius: 24px;
@@ -420,8 +423,24 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   white-space: pre-wrap;
 }
 
-/* SECTIONS */
-.section{ padding: 34px 0; }
+/* =========================
+   SECTIONS (FIXED)
+   ========================= */
+
+/* more breathing room overall */
+.section{ padding: 44px 0; }
+
+/* subtle divider between sections (enterprise vibe) */
+.section + .section{
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+[data-theme="light"] .section + .section{
+  border-top: 1px solid rgba(15,23,42,0.08);
+}
+
+/* extra spacing after "How it works" so it doesn't bleed into Use cases */
+#how{ padding-bottom: 64px; }
+
 .section-head{
   display:flex;
   align-items:flex-end;
@@ -434,6 +453,7 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   font-size: clamp(1.5rem, 2.2vw, 2.0rem);
   letter-spacing:-0.3px;
 }
+
 .cards{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
@@ -463,13 +483,22 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
 }
+
+/* UPDATED: lighter shadow + slightly clearer edge to avoid haze bleed */
 .how-col{
   padding: 18px 18px;
   border-radius: 24px;
-  border:1px solid var(--stroke);
-  background: var(--panel);
-  box-shadow: var(--shadow2);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.045);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.22);
 }
+
+[data-theme="light"] .how-col{
+  border: 1px solid rgba(15,23,42,0.12);
+  background: rgba(15,23,42,0.04);
+  box-shadow: 0 10px 26px rgba(15,23,42,0.10);
+}
+
 .step{
   width:32px;height:32px;
   display:grid;
