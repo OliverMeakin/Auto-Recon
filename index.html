@@ -1,31 +1,268 @@
-<section class="section" id="product">
-  <div class="wrap">
-    <h2>What it does</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Finds real matches</h3>
-        <p>
-          Pairs and subset-matches transactions that net to zero within a configurable grouping
-          (account, vendor, entity, project, or any custom key),
-          with optional spillover logic across periods.
-        </p>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recon Engine, rules-based reconciliation automation for Excel</title>
+  <meta name="description" content="Recon Engine automates Excel reconciliations using configurable matching rules, audit-friendly logs, and review workflows. Works for bank, payroll clearing, intercompany, AP, and more." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <div class="logo">R</div>
+        <div class="brand-text">
+          <div class="brand-name">Recon Engine</div>
+          <div class="brand-tag">Rules-based reconciliation automation for Excel</div>
+        </div>
       </div>
-      <div class="card">
-        <h3>Enforces configurable rules</h3>
-        <p>
-          Supports many-to-one, many-to-many, and one-to-one matching,
-          with rule-based constraints to prevent invalid combinations
-          and surface edge cases for review instead of forcing matches.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Produces an audit trail</h3>
-        <p>
-          Writes match status back to the working sheet,
-          appends cleared groups to an append-only audit log,
-          and generates a detailed trace output for transparency and troubleshooting.
-        </p>
-      </div>
+      <nav class="nav-links">
+        <a href="#product">Product</a>
+        <a href="#how">How it works</a>
+        <a href="#templates">Templates</a>
+        <a href="#demo">Demo</a>
+        <a href="#about">About</a>
+      </nav>
+      <button class="btn ghost" id="themeBtn" aria-label="Toggle theme">Theme</button>
     </div>
-  </div>
-</section>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Close faster, with fewer manual matches</p>
+          <h1>Automate reconciliations in Excel using configurable rules and an audit-ready trail.</h1>
+          <p class="lede">
+            Recon Engine is a flexible reconciliation core you can apply to many account types.
+            It finds matches, flags edge cases, and appends cleared groups to a clean audit log,
+            without forcing teams into a new system.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#contact">Request a demo</a>
+            <a class="btn" href="#demo">See screenshots</a>
+            <a class="btn ghost" href="https://github.com/OliverMeakin/Auto-Recon" target="_blank" rel="noreferrer">View code on GitHub</a>
+          </div>
+
+          <div class="badges">
+            <span class="badge">Excel-native</span>
+            <span class="badge">Rules-based matching</span>
+            <span class="badge">Audit trail + trace log</span>
+            <span class="badge">Review-first workflow</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="card-head">
+            <div class="pill">Standalone feel, inside Excel</div>
+            <div class="mini">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-row">
+              <div class="k">Status</div>
+              <div class="v" id="statusText">Ready</div>
+            </div>
+            <div class="panel-row">
+              <div class="k">Last run</div>
+              <div class="v" id="lastRunText">—</div>
+            </div>
+
+            <div class="panel-grid">
+              <div class="stat">
+                <div class="stat-k">Matched</div>
+                <div class="stat-v" id="m1">0</div>
+              </div>
+              <div class="stat">
+                <div class="stat-k">Cleared moved</div>
+                <div class="stat-v" id="m2">0</div>
+              </div>
+              <div class="stat">
+                <div class="stat-k">Tolerance flags</div>
+                <div class="stat-v" id="m3">0</div>
+              </div>
+              <div class="stat">
+                <div class="stat-k">Needs review</div>
+                <div class="stat-v" id="m4">0</div>
+              </div>
+            </div>
+
+            <button class="btn primary wide" id="fakeRunBtn">Run Recon</button>
+
+            <div class="log">
+              <div class="log-title">Activity log</div>
+              <div class="log-box" id="logBox"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="product">
+      <div class="wrap">
+        <h2>What it does</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Finds real matches</h3>
+            <p>
+              Pairs and subset-matches transactions that net to zero within a configurable grouping
+              (account, vendor, entity, project, cost center, or any custom key),
+              with optional spillover logic across periods.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Enforces configurable rules</h3>
+            <p>
+              Supports one-to-one, one-to-many, and many-to-many matching,
+              with rule-based constraints to prevent invalid combinations and keep teams in control.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Produces an audit trail</h3>
+            <p>
+              Writes match status back to the working sheet,
+              appends cleared groups to an append-only audit log,
+              and generates a detailed trace output for transparency and troubleshooting.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="wrap">
+        <h2>How it works</h2>
+
+        <div class="how">
+          <div class="how-col">
+            <h3>1) Configure your inputs</h3>
+            <ul>
+              <li>Select your grouping key (account, vendor, entity, project, etc.)</li>
+              <li>Choose amount columns (debit/credit/net) and optional memo/source fields</li>
+              <li>Set matching modes: exact, subset, tolerance, spillover (optional)</li>
+            </ul>
+          </div>
+          <div class="how-col">
+            <h3>2) Apply match rules</h3>
+            <ul>
+              <li>Match within each grouping to net to zero</li>
+              <li>Apply constraints (type locks, source restrictions, cardinality rules)</li>
+              <li>Flag uncertain items for review instead of forcing matches</li>
+            </ul>
+          </div>
+          <div class="how-col">
+            <h3>3) Review outputs</h3>
+            <ul>
+              <li>Status updates (Matched, Cleared, Tolerance Flag, Needs Review)</li>
+              <li>Append-only cleared log for audit support</li>
+              <li>Trace/debug sheet for transparency</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Excel-native delivery:</strong> Ships as an Excel workbook + Office Script “app shell.”
+          No new systems, minimal friction, and accounting teams can own the workflow.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="templates">
+      <div class="wrap">
+        <h2>Common templates</h2>
+        <p class="muted">
+          Recon Engine is the core. Templates are pre-configured rule sets for common reconciliation patterns.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <h3>Bank and cash activity</h3>
+            <p>
+              Statement vs ledger activity, timing differences, tolerance handling, and review flags for unmatched items.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Payroll clearing</h3>
+            <p>
+              Multi-source feeds, type-locked matching, restricted pairings, and an audit-ready cleared log.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Intercompany and AP</h3>
+            <p>
+              Entity/vendor groupings, subset matching for grouped payments, and exception routing to review.
+            </p>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Custom template:</strong> If your recon is unique, I can build a tailored configuration and matching rules around your export format.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="wrap">
+        <h2>Demo</h2>
+        <p class="muted">Add screenshots later. For now, use these placeholders.</p>
+        <div class="shots">
+          <div class="shot">Screenshot: Control panel and run flow</div>
+          <div class="shot">Screenshot: Status updates and review flags</div>
+          <div class="shot">Screenshot: Cleared log and trace output</div>
+        </div>
+        <p class="muted small">
+          Tip: take 3 screenshots from Excel and drop them into <code>/assets</code>, then replace these boxes with <code>&lt;img&gt;</code> tags.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap about-grid">
+        <div>
+          <h2>About</h2>
+          <p>
+            I build practical automation for accounting teams, focused on reconciliation workflows: clarity, traceability, and controls.
+            The goal is simple: reduce manual matching time while improving the audit trail.
+          </p>
+          <p class="muted">
+            Based in Arizona. Available for pilots, implementations, and custom templates.
+          </p>
+        </div>
+
+        <div class="about-card" id="contact">
+          <h3>Contact</h3>
+          <p class="muted">Reach out for a demo, pilot, or implementation support.</p>
+          <div class="contact">
+            <a class="btn primary wide" href="mailto:Oliversmeakin@icloud.com">Email me</a>
+            <a class="btn wide" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="btn ghost wide" href="https://github.com/OliverMeakin/Auto-Recon" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+
+          <div class="divider"></div>
+
+          <h4>What to include in a demo request</h4>
+          <ul class="muted small">
+            <li>Example export (sanitized is fine)</li>
+            <li>What you match by (account/vendor/entity/project, etc.)</li>
+            <li>Which match rules you need (exact/subset/tolerance)</li>
+            <li>Any “never match these together” constraints</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <div>© <span id="year"></span> Recon Engine</div>
+        <div class="muted">Rules-based reconciliation automation for Excel</div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
