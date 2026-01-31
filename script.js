@@ -1,132 +1,110 @@
 (function () {
   const root = document.documentElement;
 
-  // -------- Theme ----------
-  const themeBtn = document.getElementById("themeBtn");
-  const saved = localStorage.getItem("theme");
-  if (saved === "light" || saved === "dark") {
-    root.setAttribute("data-theme", saved);
-  }
+  // Footer year
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  function currentTheme() {
-    return root.getAttribute("data-theme") || "dark";
-  }
+  // Theme
+  const themeBtn = document.getElementById("themeBtn");
+  const saved = localStorage.getItem("re_theme");
+  if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
 
   function setTheme(next) {
     root.setAttribute("data-theme", next);
-    localStorage.setItem("theme", next);
+    localStorage.setItem("re_theme", next);
   }
 
   if (themeBtn) {
     themeBtn.addEventListener("click", () => {
-      setTheme(currentTheme() === "dark" ? "light" : "dark");
+      const current = root.getAttribute("data-theme") || "dark";
+      setTheme(current === "dark" ? "light" : "dark");
     });
   }
 
-  // -------- Mobile nav ----------
-  const navToggle = document.getElementById("navToggle");
-  const mobileMenu = document.getElementById("mobileMenu");
+  // Mobile menu toggle with X
+  const btn = document.getElementById("navToggle");
+  const menu = document.getElementById("mobileMenu");
 
-  function closeMenu() {
-    if (!mobileMenu || !navToggle) return;
-    mobileMenu.hidden = true;
-    navToggle.setAttribute("aria-expanded", "false");
+  function setOpen(open) {
+    if (!btn || !menu) return;
+    btn.classList.toggle("is-open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if (open) menu.removeAttribute("hidden");
+    else menu.setAttribute("hidden", "");
   }
 
-  if (navToggle && mobileMenu) {
-    navToggle.addEventListener("click", () => {
-      const open = mobileMenu.hidden === false;
-      mobileMenu.hidden = open;
-      navToggle.setAttribute("aria-expanded", String(!open));
+  if (btn && menu) {
+    btn.addEventListener("click", () => {
+      const isOpen = btn.classList.contains("is-open");
+      setOpen(!isOpen);
     });
 
-    mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+    menu.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (a) setOpen(false);
+    });
 
-    document.addEventListener("click", (e) => {
-      if (mobileMenu.hidden) return;
-      if (navToggle.contains(e.target) || mobileMenu.contains(e.target)) return;
-      closeMenu();
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 820) setOpen(false);
     });
   }
 
-  // -------- App preview demo ----------
-  const statusText = document.getElementById("statusText");
-  const lastRunText = document.getElementById("lastRunText");
-  const m1 = document.getElementById("m1");
-  const m2 = document.getElementById("m2");
-  const m3 = document.getElementById("m3");
-  const m4 = document.getElementById("m4");
-  const fakeRunBtn = document.getElementById("fakeRunBtn");
+  // Demo UI "Run recon" simulation
+  const runBtn = document.getElementById("runBtn");
+  const uiStatus = document.getElementById("uiStatus");
+  const uiLastRun = document.getElementById("uiLastRun");
+  const uiMatched = document.getElementById("uiMatched");
+  const uiCleared = document.getElementById("uiCleared");
+  const uiTol = document.getElementById("uiTol");
+  const uiReview = document.getElementById("uiReview");
   const logBox = document.getElementById("logBox");
 
-  function pad(n) { return String(n).padStart(2, "0"); }
   function nowStamp() {
     const d = new Date();
-    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    const pad = (n) => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
   }
 
   function log(line) {
     if (!logBox) return;
-    const text = logBox.textContent ? logBox.textContent + "\n" : "";
-    logBox.textContent = text + line;
+    logBox.textContent = `${logBox.textContent}\n${line}`;
     logBox.scrollTop = logBox.scrollHeight;
   }
 
-  function setCounts(a, b, c, d) {
-    if (m1) m1.textContent = String(a);
-    if (m2) m2.textContent = String(b);
-    if (m3) m3.textContent = String(c);
-    if (m4) m4.textContent = String(d);
+  function setText(el, val) {
+    if (el) el.textContent = String(val);
   }
 
-  function setStatus(s) {
-    if (statusText) statusText.textContent = s;
-  }
+  if (logBox) logBox.textContent = `${nowStamp()} | Website loaded`;
 
-  function setLastRun() {
-    if (lastRunText) lastRunText.textContent = nowStamp();
-  }
-
-  // Initial demo log
-  if (logBox && logBox.textContent.trim() === "") {
-    log(`${nowStamp()} | Website loaded`);
-  }
-
-  if (fakeRunBtn) {
-    fakeRunBtn.addEventListener("click", async () => {
-      fakeRunBtn.disabled = true;
-      setStatus("Running");
-      log(`${nowStamp()} | Initializing run`);
-      await new Promise(r => setTimeout(r, 500));
-
-      log(`${nowStamp()} | Loading workbook data`);
-      await new Promise(r => setTimeout(r, 700));
-
-      log(`${nowStamp()} | Applying match rules`);
-      await new Promise(r => setTimeout(r, 800));
-
+  if (runBtn) {
+    runBtn.addEventListener("click", () => {
+      setText(uiStatus, "Running");
+      setText(uiLastRun, nowStamp());
+      log(`${nowStamp()} | Running matching rules`);
       log(`${nowStamp()} | Writing statuses`);
-      await new Promise(r => setTimeout(r, 650));
+      log(`${nowStamp()} | Appending cleared groups`);
+      log(`${nowStamp()} | Generating trace output`);
 
-      log(`${nowStamp()} | Appending cleared log`);
-      await new Promise(r => setTimeout(r, 650));
-
-      // Deterministic-ish demo numbers
       const matched = 128;
       const cleared = 121;
       const tol = 4;
       const review = 3;
 
-      setCounts(matched, cleared, tol, review);
-      setLastRun();
-      setStatus("Done");
-      log(`${nowStamp()} | Done`);
-
-      fakeRunBtn.disabled = false;
+      window.setTimeout(() => {
+        setText(uiMatched, matched);
+        setText(uiCleared, cleared);
+        setText(uiTol, tol);
+        setText(uiReview, review);
+        setText(uiStatus, "Done");
+        log(`${nowStamp()} | Done`);
+      }, 450);
     });
   }
-
-  // Footer year
-  const year = document.getElementById("year");
-  if (year) year.textContent = String(new Date().getFullYear());
 })();
