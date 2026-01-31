@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Recon App, Excel automation for payroll and offshore recon</title>
-  <meta name="description" content="Recon App automates complex payroll and offshore reconciliations inside Excel, with clear rules, audit-friendly logs, and fast close support." />
+  <title>Recon Engine, rules-based reconciliation automation for Excel</title>
+  <meta name="description" content="Recon Engine automates Excel reconciliations using configurable matching rules, audit-friendly logs, and review workflows. Works for bank, payroll clearing, intercompany, AP, and more." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,13 +13,14 @@
       <div class="brand">
         <div class="logo">R</div>
         <div class="brand-text">
-          <div class="brand-name">Recon App</div>
-          <div class="brand-tag">Excel-based reconciliation automation</div>
+          <div class="brand-name">Recon Engine</div>
+          <div class="brand-tag">Rules-based reconciliation automation for Excel</div>
         </div>
       </div>
       <nav class="nav-links">
         <a href="#product">Product</a>
         <a href="#how">How it works</a>
+        <a href="#templates">Templates</a>
         <a href="#demo">Demo</a>
         <a href="#about">About</a>
       </nav>
@@ -31,11 +32,11 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Close faster, with fewer surprises</p>
-          <h1>Automate messy reconciliations in Excel, with rules your auditors can follow.</h1>
+          <p class="eyebrow">Close faster, with fewer manual matches</p>
+          <h1>Automate reconciliations in Excel using configurable rules and an audit-ready trail.</h1>
           <p class="lede">
-            Recon App is a role-aware reconciliation engine for payroll and offshore tax activity.
-            It matches, flags, and moves entries to a Cleared log, producing an audit-friendly trail.
+            Recon Engine is a flexible reconciliation “core” you can apply to many types of accounts.
+            It finds matches, flags edge cases, and appends cleared groups to a clean audit log, without forcing you into a new system.
           </p>
 
           <div class="cta-row">
@@ -45,10 +46,10 @@
           </div>
 
           <div class="badges">
-            <span class="badge">Excel Office Scripts</span>
-            <span class="badge">Role-aware matching</span>
-            <span class="badge">SS/MED constraints</span>
-            <span class="badge">Offshore source rules</span>
+            <span class="badge">Excel-native</span>
+            <span class="badge">Rules-based matching</span>
+            <span class="badge">Audit trail + debug trace</span>
+            <span class="badge">Review-first workflow</span>
           </div>
         </div>
 
@@ -80,7 +81,7 @@
                 <div class="stat-v" id="m2">0</div>
               </div>
               <div class="stat">
-                <div class="stat-k">.01 variance</div>
+                <div class="stat-k">Tolerance flags</div>
                 <div class="stat-v" id="m3">0</div>
               </div>
               <div class="stat">
@@ -105,16 +106,22 @@
         <h2>What it does</h2>
         <div class="cards">
           <div class="card">
-            <h3>Finds real matches</h3>
-            <p>Pairs and subset-matches transactions that net to zero inside a Vess/Voy bucket, with optional spillover checks.</p>
+            <h3>Finds matches you’d do manually</h3>
+            <p>
+              Exact pairs, subset matches (many-to-one / many-to-many), and tolerance-based matches (ex: ±$0.01) inside a defined bucket.
+            </p>
           </div>
           <div class="card">
-            <h3>Enforces your rules</h3>
-            <p>SS can match many-to-one-or-many. MED enforces exactly one offshore line. ADP↔ADP blocked. SS and MED never mix.</p>
+            <h3>Enforces your internal rules</h3>
+            <p>
+              Lock matching by type, restrict source-to-source pairings, and prevent “bad matches” automatically while still surfacing exceptions for review.
+            </p>
           </div>
           <div class="card">
             <h3>Produces an audit trail</h3>
-            <p>Writes Status back to the Recon sheet, appends cleared groups to a Cleared sheet, and creates a debug trace for review.</p>
+            <p>
+              Writes statuses back to your working sheet, appends cleared groups to an append-only log, and generates a debug trace for troubleshooting.
+            </p>
           </div>
         </div>
       </div>
@@ -123,36 +130,65 @@
     <section class="section" id="how">
       <div class="wrap">
         <h2>How it works</h2>
+
         <div class="how">
           <div class="how-col">
-            <h3>Role-aware matching</h3>
+            <h3>1) Configure your rules</h3>
             <ul>
-              <li>ADP PAYMT lines match against OFFSHORE sources (KPS/MGA/EIB)</li>
-              <li>Never allow ADP to match ADP</li>
-              <li>Exceptions: “MEBA PRB” or “MMP” can match broadly (still type-locked)</li>
+              <li>Pick your “bucket” field (account, vendor, entity, project, etc.)</li>
+              <li>Select amount columns (debit/credit/net) and optional memo/source fields</li>
+              <li>Set match types: exact, subset, tolerance, spillover (optional)</li>
             </ul>
           </div>
           <div class="how-col">
-            <h3>Type constraints</h3>
+            <h3>2) Run the engine</h3>
             <ul>
-              <li>FICA SS and FICA MED are locked and never mix</li>
-              <li>SS: many ADP payments can clear to one or more offshore offsets</li>
-              <li>MED: many ADP payments must clear to exactly one offshore offset</li>
+              <li>Matches within each bucket to net to zero</li>
+              <li>Applies constraints (type locks, source restrictions, cardinality rules)</li>
+              <li>Flags “Needs Review” instead of forcing weak matches</li>
             </ul>
           </div>
           <div class="how-col">
-            <h3>Outputs</h3>
+            <h3>3) Review outputs</h3>
             <ul>
-              <li>Status column updates (Matched, Cleared, .01 variance, Needs Review)</li>
-              <li>Cleared sheet append-only log</li>
-              <li>Recon_Debug trace for troubleshooting</li>
+              <li>Status column updates (Matched, Cleared, Tolerance Flag, Needs Review)</li>
+              <li>Cleared sheet: append-only audit log</li>
+              <li>Debug/trace sheet for transparency</li>
             </ul>
           </div>
         </div>
 
         <div class="note">
-          <strong>Implementation:</strong> This is designed to ship as an Excel workbook + Office Script “app shell”.
-          It looks like software, but stays inside the environment your accounting team already uses.
+          <strong>Excel-native delivery:</strong> Ships as an Excel workbook + Office Script “app shell.”
+          No new systems, minimal friction, and accounting teams can own the workflow.
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="templates">
+      <div class="wrap">
+        <h2>Common templates</h2>
+        <p class="muted">
+          Recon Engine is the core. Templates are pre-configured rule sets for common reconciliation patterns.
+        </p>
+
+        <div class="cards">
+          <div class="card">
+            <h3>Bank / Cash activity</h3>
+            <p>Bank statement vs GL activity, timing differences, tolerance handling, review flags for unmatched items.</p>
+          </div>
+          <div class="card">
+            <h3>Payroll clearing</h3>
+            <p>System A vs System B feeds, type-locked matching, restricted source pairings, audit-ready cleared logs.</p>
+          </div>
+          <div class="card">
+            <h3>Intercompany + AP</h3>
+            <p>Entity/vendor buckets, subset matching for grouped payments, exception routing to “Needs Review.”</p>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Custom template:</strong> If your recon is unique, I can build a tailored configuration and matching rules around your export format.
         </div>
       </div>
     </section>
@@ -162,12 +198,12 @@
         <h2>Demo</h2>
         <p class="muted">Add screenshots later. For now, use these placeholders.</p>
         <div class="shots">
-          <div class="shot">Screenshot: Recon App control panel</div>
-          <div class="shot">Screenshot: Recon sheet Status updates</div>
-          <div class="shot">Screenshot: Cleared sheet grouping</div>
+          <div class="shot">Screenshot: Recon Engine control panel</div>
+          <div class="shot">Screenshot: Status updates in working sheet</div>
+          <div class="shot">Screenshot: Cleared log + debug trace</div>
         </div>
         <p class="muted small">
-          Tip: take 3 screenshots from Excel and drop them into <code>/assets</code>, then swap these boxes for <code>&lt;img&gt;</code>.
+          Tip: take 3 screenshots from Excel and drop them into <code>/assets</code>, then replace these boxes with <code>&lt;img&gt;</code> tags.
         </p>
       </div>
     </section>
@@ -177,13 +213,14 @@
         <div>
           <h2>About</h2>
           <p>
-            I build automation for high-volume accounting teams, especially reconciliation workflows that are painful to do manually.
-            I care about clarity, traceability, and making tools people actually want to use.
+            I build practical automation for accounting teams, focused on reconciliation workflows: clarity, traceability, and controls.
+            The goal is simple: reduce manual matching time while improving the audit trail.
           </p>
           <p class="muted">
-            Based in Arizona. Available for contract work, pilots, and implementation support.
+            Based in Arizona. Available for pilots, implementations, and custom templates.
           </p>
         </div>
+
         <div class="about-card" id="contact">
           <h3>Contact</h3>
           <p class="muted">Reach out for a demo, pilot, or implementation support.</p>
@@ -197,9 +234,10 @@
 
           <h4>What to include in a demo request</h4>
           <ul class="muted small">
-            <li>How many lines per month you reconcile</li>
-            <li>Which systems feed your Excel exports</li>
-            <li>Any hard rules (like SS/MED constraints)</li>
+            <li>Example export (sanitized is fine)</li>
+            <li>What you match by (account/vendor/entity/project, etc.)</li>
+            <li>Which match rules you need (exact/subset/tolerance)</li>
+            <li>Any “never match these together” constraints</li>
           </ul>
         </div>
       </div>
@@ -207,8 +245,8 @@
 
     <footer class="footer">
       <div class="wrap footer-inner">
-        <div>© <span id="year"></span> Recon App</div>
-        <div class="muted">Built for Excel-native accounting teams</div>
+        <div>© <span id="year"></span> Recon Engine</div>
+        <div class="muted">Rules-based reconciliation automation for Excel</div>
       </div>
     </footer>
   </main>
